@@ -1,7 +1,9 @@
 <template>
-  <div class="category">
-    <h1>All categories</h1>
-    <CategoriesList />
+  <div class="l-category-page">
+    <div class="container">
+      <h1>All categories</h1>
+      <CategoriesList />
+    </div>
   </div>
 </template>
 

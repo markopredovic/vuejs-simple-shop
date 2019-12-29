@@ -13,6 +13,7 @@ const actions = {
     const response = await axios.get(
       "https://react-simple-ecommerce-shop.firebaseio.com/categories.json"
     );
+    console.log("CATEGORIES", response.data);
     commit("setCategories", response.data);
   }
   // async addTodo({ commit }, title) {
