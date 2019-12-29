@@ -1,0 +1,21 @@
+/* ------------------------------------
+    header:
+-------------------------------------- */
+header.l-header {
+  margin-bottom: $l-margin;
+}
+// navbar:
+.navbar-nav {
+  li a {
+    padding: 5px 10px;
+    color: lighten($black, 50%);
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &.router-link-exact-active {
+      color: $black;
+    }
+  }
+}

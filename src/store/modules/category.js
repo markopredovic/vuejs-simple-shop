@@ -15,43 +15,39 @@ const actions = {
     );
     console.log("CATEGORIES", response.data);
     commit("setCategories", response.data);
+  },
+  async addCategory({ commit }, category) {
+    const response = await axios.post(
+      "https://react-simple-ecommerce-shop.firebaseio.com/categories.json",
+      {
+        id: category.id,
+        name: category.name,
+        description: category.description
+      }
+    );
+
+    const newCategory = { ...category, db_node_name: response.data.name };
+
+    commit("addCategory", newCategory);
   }
-  // async addTodo({ commit }, title) {
-  //   const response = await axios.post(
-  //     "https://jsonplaceholder.typicode.com/todos",
-  //     {
-  //       title,
-  //       completed: false
-  //     }
-  //   );
-  //   commit("newTodo", response.data);
-  // },
-  // async deleteTodo({ commit }, id) {
-  //   await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
-  //   commit("deleteTodo", id);
-  // },
-  // async filterTodos({ commit }, e) {
-  //   const _limit = parseInt(
-  //     e.target.options[e.target.options.selectedIndex].innerText
-  //   );
-  //   const response = await axios.get(
-  //     `https://jsonplaceholder.typicode.com/todos?_limit=${_limit}`
-  //   );
-  //   commit("setTodos", response.data);
-  // },
-  // async updateTodo({ commit }, todo) {
-  //   const response = await axios.put(
-  //     `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-  //     todo
-  //   );
-  //   window.console.log(response.data);
-  //   commit("updateTodo", response.data);
-  // }
 };
 
 const mutations = {
-  setCategories: (state, categories) => (state.categories = categories)
-  // newTodo: (state, todo) => state.todos.unshift(todo),
+  setCategories: (state, categoriesObj) => {
+    let updatedCategories = Object.keys(categoriesObj).map(el => {
+      const updatedEl = {
+        ...categoriesObj[el],
+        db_node_name: el
+      };
+      return updatedEl;
+    });
+    state.categories = updatedCategories;
+  },
+  addCategory: (state, category) => {
+    console.log("mutations category", category);
+    console.log("mutations state", state);
+    state.categories.push(category);
+  }
   // deleteTodo: (state, id) =>
   //   (state.todos = state.todos.filter(todo => todo.id !== id)),
   // updateTodo: (state, todo) => {
@@ -66,3 +62,25 @@ export default {
   actions,
   mutations
 };
+
+// async deleteTodo({ commit }, id) {
+//   await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+//   commit("deleteTodo", id);
+// },
+// async filterTodos({ commit }, e) {
+//   const _limit = parseInt(
+//     e.target.options[e.target.options.selectedIndex].innerText
+//   );
+//   const response = await axios.get(
+//     `https://jsonplaceholder.typicode.com/todos?_limit=${_limit}`
+//   );
+//   commit("setTodos", response.data);
+// },
+// async updateTodo({ commit }, todo) {
+//   const response = await axios.put(
+//     `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
+//     todo
+//   );
+//   window.console.log(response.data);
+//   commit("updateTodo", response.data);
+// }

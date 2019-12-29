@@ -1,7 +1,7 @@
 <template>
   <div class="l-category-page">
     <div class="container">
-      <h1>All categories</h1>
+      <AddCategoryForm />
       <CategoriesList />
     </div>
   </div>
@@ -9,9 +9,12 @@
 
 <script>
 import CategoriesList from "../components/Category/CategoriesList";
+import AddCategoryForm from "../components/Category/AddCategoryForm";
+
 export default {
   components: {
-    CategoriesList
+    CategoriesList,
+    AddCategoryForm
   }
 };
 </script>

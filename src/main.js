@@ -14,5 +14,5 @@ new Vue({
 }).$mount("#app");
 
 // TODO:
-// add bootstrap navbar
+// add - add category component
 // add vuetify icons

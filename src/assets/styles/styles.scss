@@ -1,2 +1,12 @@
+@import "./bootstrap-variables";
+@import "./variables";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap-vue/src/index.scss";
+
+// layout
+@import "./layout/common";
+@import "./layout/header";
+@import "./layout/category";
+
+// modules:
+@import "./modules/common";

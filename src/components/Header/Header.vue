@@ -1,8 +1,8 @@
 <template>
-  <header>
+  <header class="l-header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Simple e-commerce shop</a>
         <button
           class="navbar-toggler"
           type="button"
