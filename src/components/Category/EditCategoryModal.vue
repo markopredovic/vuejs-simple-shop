@@ -81,14 +81,6 @@ export default {
 
       return _errors;
     },
-    mounted() {
-      this.$root.$on("bv::modal::show", (bvEvent, modalId) => {
-        console.log("Modal is about to be shown", bvEvent, modalId);
-      });
-      this.$root.$on("bv::modal::hide", (bvEvent, modalId) => {
-        console.log("Modal is about to be hidden", bvEvent, modalId);
-      });
-    },
     closeModal() {
       this.show = false;
       this.$emit("modal-closed");
@@ -99,7 +91,3 @@ export default {
 
 <style>
 </style>
-
-// TODO:
-// handle modal close
-// emit modal closed event to parent

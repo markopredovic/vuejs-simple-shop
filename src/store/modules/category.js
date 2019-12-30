@@ -13,7 +13,6 @@ const getters = {
 const actions = {
   async fetchCategories({ commit }) {
     const response = await axios.get(`${FIREBASE_BASE_URL}/categories.json`);
-    console.log("CATEGORIES", response.data);
     commit("setCategories", response.data);
   },
   async addCategory({ commit }, category) {
@@ -72,25 +71,3 @@ export default {
   actions,
   mutations
 };
-
-// async deleteTodo({ commit }, id) {
-//   await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
-//   commit("deleteTodo", id);
-// },
-// async filterTodos({ commit }, e) {
-//   const _limit = parseInt(
-//     e.target.options[e.target.options.selectedIndex].innerText
-//   );
-//   const response = await axios.get(
-//     `https://jsonplaceholder.typicode.com/todos?_limit=${_limit}`
-//   );
-//   commit("setTodos", response.data);
-// },
-// async updateTodo({ commit }, todo) {
-//   const response = await axios.put(
-//     `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-//     todo
-//   );
-//   window.console.log(response.data);
-//   commit("updateTodo", response.data);
-// }
