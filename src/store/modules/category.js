@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const FIREBASE_BASE_URL = "https://react-simple-ecommerce-shop.firebaseio.com";
+
 const state = {
   categories: []
 };
@@ -10,25 +12,26 @@ const getters = {
 
 const actions = {
   async fetchCategories({ commit }) {
-    const response = await axios.get(
-      "https://react-simple-ecommerce-shop.firebaseio.com/categories.json"
-    );
+    const response = await axios.get(`${FIREBASE_BASE_URL}/categories.json`);
     console.log("CATEGORIES", response.data);
     commit("setCategories", response.data);
   },
   async addCategory({ commit }, category) {
-    const response = await axios.post(
-      "https://react-simple-ecommerce-shop.firebaseio.com/categories.json",
-      {
-        id: category.id,
-        name: category.name,
-        description: category.description
-      }
-    );
+    const response = await axios.post(`${FIREBASE_BASE_URL}/categories.json`, {
+      id: category.id,
+      name: category.name,
+      description: category.description
+    });
 
     const newCategory = { ...category, db_node_name: response.data.name };
 
     commit("addCategory", newCategory);
+  },
+  async deleteCategory({ commit }, category) {
+    await axios.delete(
+      `${FIREBASE_BASE_URL}/categories/${category.db_node_name}.json`
+    );
+    commit("removeCategory", category);
   }
 };
 
@@ -44,9 +47,11 @@ const mutations = {
     state.categories = updatedCategories;
   },
   addCategory: (state, category) => {
-    console.log("mutations category", category);
-    console.log("mutations state", state);
     state.categories.push(category);
+  },
+  removeCategory: (state, category) => {
+    const _index = state.categories.findIndex(el => el.id === category.id);
+    state.categories.splice(_index, 1);
   }
   // deleteTodo: (state, id) =>
   //   (state.todos = state.todos.filter(todo => todo.id !== id)),
