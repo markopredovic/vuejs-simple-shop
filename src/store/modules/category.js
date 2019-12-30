@@ -32,6 +32,13 @@ const actions = {
       `${FIREBASE_BASE_URL}/categories/${category.db_node_name}.json`
     );
     commit("removeCategory", category);
+  },
+  async updateCategory({ commit }, updatedCategory) {
+    await axios.put(
+      `${FIREBASE_BASE_URL}/categories/${updatedCategory.db_node_name}.json`,
+      updatedCategory
+    );
+    commit("updateCategory", updatedCategory);
   }
 };
 
@@ -52,13 +59,11 @@ const mutations = {
   removeCategory: (state, category) => {
     const _index = state.categories.findIndex(el => el.id === category.id);
     state.categories.splice(_index, 1);
+  },
+  updateCategory: (state, category) => {
+    const _index = state.categories.findIndex(el => el.id === category.id);
+    state.categories.splice(_index, 1, category);
   }
-  // deleteTodo: (state, id) =>
-  //   (state.todos = state.todos.filter(todo => todo.id !== id)),
-  // updateTodo: (state, todo) => {
-  //   const _index = state.todos.findIndex(el => el.id === todo.id);
-  //   state.todos.splice(_index, 1, todo);
-  // }
 };
 
 export default {

@@ -15,7 +15,7 @@
             id="categoryName"
             :class="{ isError: errors && errors.name}"
           />
-          <span v-if="errors && errors.name" style="font-size: 1rem; color: red">{{ errors.name }}</span>
+          <small v-if="errors && errors.name" class="text-danger">{{ errors.name }}</small>
         </div>
         <div class="form-group">
           <label for="categoryDescription">Category description</label>
@@ -26,7 +26,9 @@
             rows="3"
           ></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary d-inline-flex align-items-center">
+          <b-spinner small v-if="addLoading" class="mr-2"></b-spinner>Submit
+        </button>
       </form>
     </b-modal>
   </div>
@@ -42,17 +44,19 @@ export default {
     return {
       categoryName: "",
       categoryDescription: "",
-      errors: null
+      errors: null,
+      addLoading: false
     };
   },
   methods: {
     ...mapActions(["addCategory"]),
-    handleSubmit(e) {
+    async handleSubmit(e) {
       e.preventDefault();
 
       const _errors = this.validate();
 
       if (Object.keys(_errors).length === 0) {
+        this.addLoading = true;
         this.errors = null;
         const newCategory = {
           id: uuid.v4(),
@@ -60,7 +64,10 @@ export default {
           description: this.categoryDescription
         };
 
-        this.addCategory(newCategory);
+        await this.addCategory(newCategory);
+        this.categoryName = "";
+        this.categoryDescription = "";
+        this.addLoading = false;
       } else {
         this.errors = _errors;
       }

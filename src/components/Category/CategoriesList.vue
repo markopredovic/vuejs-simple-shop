@@ -20,7 +20,7 @@
 import CategoryItem from "./CategoryItem";
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "Todos",
+  name: "CategoriesList",
   components: {
     CategoryItem
   },
