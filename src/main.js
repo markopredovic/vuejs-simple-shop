@@ -16,5 +16,4 @@ new Vue({
 }).$mount("#app");
 
 // TODO:
-// add - add category component
-// add vuetify icons
+// remove product

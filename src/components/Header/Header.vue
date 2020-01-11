@@ -20,7 +20,10 @@
               <router-link to="/">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/category">Category</router-link>
+              <router-link to="/categories">Categories</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/products">Products</router-link>
             </li>
           </ul>
         </div>
