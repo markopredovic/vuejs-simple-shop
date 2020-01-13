@@ -12,6 +12,15 @@
             <input type="text" class="form-control" id="productName" v-model="productName" />
             <small v-if="errors.name" class="text-danger">{{ errors.name }}</small>
           </div>
+          <div class="form-group l-product-image">
+            <label>Product Image:</label>
+            <input
+              type="file"
+              class="form-control-file"
+              name="product-image"
+              @change="handleProductImage"
+            />
+          </div>
           <div class="form-group">
             <label for="productCategory">Product Category:</label>
             <select
@@ -54,6 +63,7 @@
 
 <script>
 import uuid from "uuid";
+import { storage } from "../../firebase";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -61,6 +71,7 @@ export default {
   data() {
     return {
       productName: "",
+      productImageFile: null,
       productCategoryName: "",
       productCategoryId: null,
       productPrice: null,
@@ -79,24 +90,65 @@ export default {
 
       if (Object.keys(this.errors).length === 0) {
         this.addLoading = true;
-        const addProduct = {
-          id: uuid.v4(),
-          name: this.productName,
-          price: this.productPrice,
-          description: this.productDescription,
-          categoryId: this.productCategoryId,
-          categoryName: this.productCategoryName
-        };
-        await this.addProduct(addProduct);
-        this.addLoading = false;
-        this.showProductAddedAlert = true;
+
+        console.log("productImageFile", this.productImageFile);
+
+        if (this.productImageFile) {
+          const uploadTask = storage
+            .ref(`images/${this.productImageFile.name}`)
+            .put(this.productImageFile);
+
+          uploadTask.on(
+            "state_changed",
+            () => {},
+            error => {
+              console.log(error);
+            },
+            () => {
+              // complete function ....
+              storage
+                .ref("images")
+                .child(this.productImageFile.name)
+                .getDownloadURL()
+                .then(url => {
+                  const addProduct = {
+                    id: uuid.v4(),
+                    name: this.productName,
+                    productImageUrl: url,
+                    price: this.productPrice,
+                    description: this.productDescription,
+                    categoryId: this.productCategoryId,
+                    categoryName: this.productCategoryName
+                  };
+                  this.addProduct(addProduct);
+                  this.addLoading = false;
+                  this.showProductAddedAlert = true;
+                });
+            }
+          );
+        } else {
+          const addProduct = {
+            id: uuid.v4(),
+            name: this.productName,
+            productImageUrl: "",
+            price: this.productPrice,
+            description: this.productDescription,
+            categoryId: this.productCategoryId,
+            categoryName: this.productCategoryName
+          };
+          await this.addProduct(addProduct);
+          this.addLoading = false;
+          this.showProductAddedAlert = true;
+        }
       }
     },
-    handleCategoryChange(e) {
-      console.log("category changed", e.target.value);
+    handleCategoryChange() {
       const selectBox = document.getElementById("productCategory");
       this.productCategoryName =
         selectBox.options[selectBox.selectedIndex].text;
+    },
+    handleProductImage(e) {
+      this.productImageFile = e.target.files[0];
     },
     _validate() {
       let _errors = {};

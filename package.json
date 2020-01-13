@@ -12,6 +12,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.4.4",
+    "firebase": "^7.6.2",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
     "uuid": "^3.3.3",

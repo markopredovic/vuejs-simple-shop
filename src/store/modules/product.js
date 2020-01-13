@@ -22,6 +22,7 @@ const actions = {
     const response = await axios.post(`${FIREBASE_BASE_URL}/products.json`, {
       id: product.id,
       name: product.name,
+      productImageUrl: product.productImageUrl,
       price: product.price,
       description: product.description,
       categoryId: product.categoryId,
