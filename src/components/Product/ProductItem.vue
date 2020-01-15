@@ -8,7 +8,7 @@
     <td>{{ product.price }}</td>
     <td>{{ product.description }}</td>
     <td class="text-center h4">
-      <span class="fa fa-edit text-edit"></span>
+      <span @click="$emit('editProduct', editProduct)" class="fa fa-edit text-edit"></span>
     </td>
     <td class="text-center h4">
       <span @click="handleDelete" class="fa fa-times text-danger"></span>
@@ -21,6 +21,11 @@ import { mapActions } from "vuex";
 
 export default {
   name: "ProductItem",
+  data() {
+    return {
+      editProduct: this.product
+    };
+  },
   props: ["product"],
   methods: {
     ...mapActions(["deleteProduct"]),

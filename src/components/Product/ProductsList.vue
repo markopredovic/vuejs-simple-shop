@@ -13,7 +13,12 @@
         </tr>
       </thead>
       <tbody>
-        <ProductItem v-for="product in allProducts" :key="product.id" :product="product" />
+        <ProductItem
+          v-for="product in allProducts"
+          :key="product.id"
+          :product="product"
+          v-on:editProduct="handleEdit"
+        />
       </tbody>
     </table>
   </div>
@@ -29,7 +34,10 @@ export default {
     ProductItem
   },
   methods: {
-    ...mapActions(["fetchProducts"])
+    ...mapActions(["fetchProducts"]),
+    handleEdit($event) {
+      this.$emit("editProduct", $event);
+    }
   },
   computed: mapGetters(["allProducts"]),
   created() {
@@ -37,6 +45,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>
