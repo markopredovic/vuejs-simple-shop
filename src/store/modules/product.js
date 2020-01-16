@@ -49,6 +49,16 @@ const actions = {
     if (response.statusText === "OK") {
       commit("removeProduct", product);
     } else throw new Error("delete product error");
+  },
+  async editProduct({ commit }, product) {
+    const response = await axios.put(
+      `${FIREBASE_BASE_URL}/products/${product.db_node_name}.json`,
+      product
+    );
+
+    console.log("ACTION EDIT PRODUCT", response);
+
+    commit("updateProduct", response.data);
   }
 };
 
@@ -71,6 +81,15 @@ const mutations = {
       product => product.id !== deletedProduct.id
     );
     state.products = updatedProducts;
+  },
+  updateProduct: (state, updateProduct) => {
+    state.products = state.products.map(product => {
+      if (product.id === updateProduct.id) {
+        return updateProduct;
+      } else {
+        return product;
+      }
+    });
   }
 };
 

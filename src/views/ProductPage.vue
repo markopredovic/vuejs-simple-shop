@@ -4,7 +4,7 @@
       <AddProductForm />
       <EditProductForm
         :showEditModal="showEditModal"
-        :editProduct="editProduct"
+        :product="product"
         v-on:closeEditModal="handleCloseEditModal"
       />
       <ProductsList v-on:editProduct="handleShowEditModal" />
@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       showEditModal: false,
-      editProduct: null
+      product: null
     };
   },
   components: {
@@ -32,13 +32,12 @@ export default {
   },
   methods: {
     handleShowEditModal(product) {
-      console.log("handleShowEditModal");
-      this.editProduct = product;
+      this.product = product;
       this.showEditModal = true;
     },
     handleCloseEditModal() {
       this.showEditModal = false;
-      this.editProduct = null;
+      this.product = null;
     }
   }
 };
