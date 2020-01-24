@@ -25,7 +25,7 @@ export default {
       loading: false
     };
   },
-  props: ["category"],
+  props: ["category", "allProducts"],
   components: {
     EditCategoryModal
   },
@@ -33,20 +33,32 @@ export default {
     ...mapActions(["deleteCategory"]),
     async handleDelete() {
       try {
-        this.loading = true;
-        await this.deleteCategory(this.category);
-        this.loading = false;
+        const _isAllowDelete = this._validateDelete();
+        if (_isAllowDelete) {
+          this.loading = true;
+          await this.deleteCategory(this.category);
+          this.loading = false;
+        } else {
+          this.$emit("deleteForbidden");
+        }
       } catch (err) {
         console.log(err);
-        // show error in Tosts message
       }
     },
     handleModalClosed() {
       this.editMode = false;
+    },
+    _validateDelete() {
+      let _isAllowedDelete = true;
+
+      const productsHasCurrentCategory = this.allProducts.filter(
+        product => product.categoryId === this.category.id
+      );
+
+      _isAllowedDelete = productsHasCurrentCategory.length === 0;
+
+      return _isAllowedDelete;
     }
   }
 };
 </script>
-
-<style>
-</style>

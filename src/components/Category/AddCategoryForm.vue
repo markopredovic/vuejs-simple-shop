@@ -27,7 +27,7 @@
           ></textarea>
         </div>
         <button type="submit" class="btn btn-primary d-inline-flex align-items-center">
-          <b-spinner small v-if="addLoading" class="mr-2"></b-spinner>Submit
+          <b-spinner small v-if="addLoading" class="mr-2"></b-spinner>Add
         </button>
       </form>
     </b-modal>

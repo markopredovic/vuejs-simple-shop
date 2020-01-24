@@ -5,7 +5,7 @@
     </div>
     <div class="l-add-product-modal">
       <b-modal id="my-modal" ok-only title="Add Product" ok-title="Close" @hidden="resetModal">
-        <b-alert v-model="showProductAddedAlert" variant="success">Success Alert</b-alert>
+        <b-alert v-model="showProductAddedAlert" variant="success">Product Added!</b-alert>
         <form @submit="handleAddProduct">
           <div class="form-group">
             <label for="productName">Product Name:</label>

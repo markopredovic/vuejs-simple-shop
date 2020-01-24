@@ -3,17 +3,23 @@ import axios from "axios";
 const FIREBASE_BASE_URL = "https://react-simple-ecommerce-shop.firebaseio.com";
 
 const state = {
-  categories: []
+  categories: [],
+  products: []
 };
 
 const getters = {
-  allCategories: state => state.categories
+  allCategories: state => state.categories,
+  allProducts: state => state.products
 };
 
 const actions = {
   async fetchCategories({ commit }) {
     const response = await axios.get(`${FIREBASE_BASE_URL}/categories.json`);
     commit("setCategories", response.data);
+  },
+  async fetchProducts({ commit }) {
+    const response = await axios.get(`${FIREBASE_BASE_URL}/products.json`);
+    commit("setProducts", response.data);
   },
   async addCategory({ commit }, category) {
     const response = await axios.post(`${FIREBASE_BASE_URL}/categories.json`, {
@@ -51,6 +57,16 @@ const mutations = {
       return updatedEl;
     });
     state.categories = updatedCategories;
+  },
+  setProducts: (state, productsObj) => {
+    let updatedProducts = Object.keys(productsObj).map(el => {
+      const updatedEl = {
+        ...productsObj[el],
+        db_node_name: el
+      };
+      return updatedEl;
+    });
+    state.products = updatedProducts;
   },
   addCategory: (state, category) => {
     state.categories.push(category);

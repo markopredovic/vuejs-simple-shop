@@ -10,7 +10,13 @@
         </tr>
       </thead>
       <tbody>
-        <CategoryItem v-for="category in allCategories" :key="category.id" :category="category" />
+        <CategoryItem
+          v-for="category in allCategories"
+          :key="category.id"
+          :category="category"
+          :allProducts="allProducts"
+          v-on:deleteForbidden="$emit('deleteForbidden')"
+        />
       </tbody>
     </table>
   </div>
@@ -25,11 +31,12 @@ export default {
     CategoryItem
   },
   methods: {
-    ...mapActions(["fetchCategories"])
+    ...mapActions(["fetchCategories", "fetchProducts"])
   },
-  computed: mapGetters(["allCategories"]),
+  computed: mapGetters(["allCategories", "allProducts"]),
   created() {
     this.fetchCategories();
+    this.fetchProducts();
   }
 };
 </script>
