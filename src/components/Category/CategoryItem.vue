@@ -42,7 +42,7 @@ export default {
           this.$emit("deleteForbidden");
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     },
     handleModalClosed() {

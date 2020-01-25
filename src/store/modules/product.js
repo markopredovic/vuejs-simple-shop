@@ -14,11 +14,9 @@ const getters = {
 const actions = {
   async fetchProducts({ commit }) {
     const response = await axios.get(`${FIREBASE_BASE_URL}/products.json`);
-    console.log("FETCH PRODUCT", response);
     commit("setProducts", response.data ? response.data : {});
   },
   async addProduct({ commit }, product) {
-    console.log("PRODUCT", product);
     const response = await axios.post(`${FIREBASE_BASE_URL}/products.json`, {
       id: product.id,
       name: product.name,
@@ -34,8 +32,6 @@ const actions = {
         ...product,
         db_node_name: response.data.name
       };
-
-      console.log("ADD PRODUCT RESPONSE", addProduct);
 
       commit("addProduct", addProduct);
     } else {
@@ -55,8 +51,6 @@ const actions = {
       `${FIREBASE_BASE_URL}/products/${product.db_node_name}.json`,
       product
     );
-
-    console.log("ACTION EDIT PRODUCT", response);
 
     commit("updateProduct", response.data);
   }
