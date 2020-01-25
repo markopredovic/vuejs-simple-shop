@@ -69,7 +69,7 @@ export default {
           this.errors = _errors;
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     },
     validate() {

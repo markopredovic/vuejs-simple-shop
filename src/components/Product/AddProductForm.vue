@@ -78,7 +78,8 @@ export default {
       productDescription: "",
       errors: {},
       addLoading: false,
-      showProductAddedAlert: false
+      showProductAddedAlert: false,
+      uploadError: null
     };
   },
   methods: {
@@ -91,8 +92,6 @@ export default {
       if (Object.keys(this.errors).length === 0) {
         this.addLoading = true;
 
-        console.log("productImageFile", this.productImageFile);
-
         if (this.productImageFile) {
           const uploadTask = storage
             .ref(`images/${this.productImageFile.name}`)
@@ -102,7 +101,8 @@ export default {
             "state_changed",
             () => {},
             error => {
-              console.log(error);
+              // console.log(error);
+              this.uploadError = error;
             },
             () => {
               // complete function ....

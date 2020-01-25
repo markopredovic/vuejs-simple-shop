@@ -105,12 +105,8 @@ export default {
 
       this.errors = this._validate();
 
-      console.log("ERRORS", this.errors);
-
       if (Object.keys(this.errors).length === 0) {
         this.showLoader = true;
-
-        console.log("productImageFile", this.updateProduct.productImageFile);
 
         if (this.updateProduct.productImageFile) {
           const uploadTask = storage
@@ -121,7 +117,7 @@ export default {
             "state_changed",
             () => {},
             error => {
-              console.log(error);
+              // console.log(error);
             },
             () => {
               // complete function ....
@@ -134,7 +130,6 @@ export default {
                     ...this.updateProduct,
                     productImageUrl: url
                   };
-                  console.log("UPDATED PRODUCT", this.updateProduct);
                   this.editProduct(editProduct);
                   this.showLoader = false;
                   this.showProductUpdatedAlert = true;
@@ -167,7 +162,6 @@ export default {
       return _errors;
     },
     handleNameChange(e) {
-      console.log(e.target.value);
       this.updateProduct.name = e.target.value;
     },
     handleCategoryChanged(e) {
