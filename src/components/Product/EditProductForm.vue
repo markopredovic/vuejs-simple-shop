@@ -92,7 +92,8 @@ export default {
       updateProduct: null,
       errors: {},
       showLoader: false,
-      showProductUpdatedAlert: false
+      showProductUpdatedAlert: false,
+      uploadError: false
     };
   },
   methods: {
@@ -117,7 +118,7 @@ export default {
             "state_changed",
             () => {},
             error => {
-              // console.log(error);
+              this.uploadError = error;
             },
             () => {
               // complete function ....
