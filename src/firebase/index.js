@@ -3,7 +3,6 @@ import firebase from "firebase/app";
 import "firebase/storage";
 
 // Your web app's Firebase configuration
-console.log("PROCES ENV", process.env);
 var firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
   authDomain: process.env.VUE_APP_AUTH_DOMAIN,
