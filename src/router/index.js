@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import ProductPage from "../views/ProductPage";
 
 Vue.use(VueRouter);
 
@@ -23,7 +22,7 @@ const routes = [
   {
     path: "/products",
     name: "productPage",
-    component: ProductPage
+    component: () => import("../views/ProductPage.vue")
   }
 ];
 

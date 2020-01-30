@@ -8,8 +8,7 @@ const state = {
 };
 
 const getters = {
-  allCategories: state => state.categories,
-  allProducts: state => state.products
+  allCategories: state => state.categories
 };
 
 const actions = {
