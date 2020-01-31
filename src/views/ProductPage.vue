@@ -1,6 +1,7 @@
 <template>
   <div class="l-page products">
     <div class="container">
+      <PageTitle title="Products" />
       <AddProductForm />
       <EditProductForm
         :showEditModal="showEditModal"
@@ -16,6 +17,7 @@
 import ProductsList from "../components/Product/ProductsList";
 import AddProductForm from "../components/Product/AddProductForm";
 import EditProductForm from "../components/Product/EditProductForm";
+import PageTitle from "../components/Title/PageTitle";
 
 export default {
   name: "ProductPage",
@@ -28,7 +30,8 @@ export default {
   components: {
     ProductsList,
     AddProductForm,
-    EditProductForm
+    EditProductForm,
+    PageTitle
   },
   methods: {
     handleShowEditModal(product) {

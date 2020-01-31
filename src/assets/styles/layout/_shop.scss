@@ -1,0 +1,38 @@
+// shop:
+.l-shop {
+  display: flex;
+  flex-wrap: wrap;
+
+  > div {
+    width: 32%;
+    margin: 0 2% 40px 0;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+
+  .l-add-product {
+    padding: 20px;
+    border: 1px solid #ddd;
+  }
+}
+
+// modules:
+.m-add-product {
+  .l-img {
+    margin-bottom: 20px;
+    img {
+      display: block;
+      height: 350px;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  .l-content {
+    text-align: center;
+  }
+  .l-action {
+    text-align: center;
+  }
+}
