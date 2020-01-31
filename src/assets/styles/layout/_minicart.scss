@@ -1,0 +1,43 @@
+// minicart:
+.l-minicart {
+  width: 400px;
+
+  .l-minicart-item {
+    position: relative;
+
+    &:last-child .m-minicart-item {
+      border-bottom: none;
+    }
+  }
+}
+
+// modules:
+.m-minicart-item {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+
+  .l-img {
+    width: 90px;
+    margin-right: 20px;
+
+    img {
+      height: 90px;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  .l-inner-content {
+  }
+  .l-action {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+  }
+}
+
+.empty-cart {
+  padding: 10px;
+  font-size: 1.8rem;
+}

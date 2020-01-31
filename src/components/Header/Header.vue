@@ -14,7 +14,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
               <router-link to="/">Home</router-link>
@@ -26,6 +26,17 @@
               <router-link to="/products">Products</router-link>
             </li>
           </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <b-dropdown class="m-2" right no-caret>
+                <template v-slot:button-content>
+                  <span class="fa fa-cart-plus"></span>
+                  <span class="sr-only">Search</span>
+                </template>
+                <Minicart />
+              </b-dropdown>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -33,7 +44,10 @@
 </template>
 
 <script>
+import Minicart from "../Minicart/Minicart";
+
 export default {
-  name: "Header"
+  name: "Header",
+  components: { Minicart }
 };
 </script>

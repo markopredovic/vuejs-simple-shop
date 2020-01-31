@@ -16,16 +16,16 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "AddProduct",
   props: ["product"],
   methods: {
+    ...mapActions(["addToCart"]),
     handleAddToCart() {
-      alert("TODO: Add To Cart");
+      this.addToCart(this.product);
     }
   }
 };
 </script>
-
-<style>
-</style>
