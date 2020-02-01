@@ -12,6 +12,15 @@
         <b-button variant="dark" class="btn-lg" @click="handleAddToCart">Add to Cart</b-button>
       </div>
     </div>
+    <b-modal
+      title="Add to Cart"
+      v-model="isAddToCartModal"
+      ok-only
+      ok-title="Close"
+      header-bg-variant="success"
+      header-text-variant="light"
+      hide-backdrop
+    >Product "{{product.name}}" added to cart!</b-modal>
   </div>
 </template>
 
@@ -20,11 +29,21 @@ import { mapActions } from "vuex";
 
 export default {
   name: "AddProduct",
+  data() {
+    return {
+      isAddToCartModal: false
+    };
+  },
   props: ["product"],
   methods: {
     ...mapActions(["addToCart"]),
     handleAddToCart() {
-      this.addToCart(this.product);
+      try {
+        this.addToCart(this.product);
+        this.isAddToCartModal = true;
+      } catch (e) {
+        throw new Error("Add to cart error");
+      }
     }
   }
 };

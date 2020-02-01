@@ -18,6 +18,10 @@
           </div>
         </div>
       </div>
+      <div class="l-minicart-total">Total: {{total}}</div>
+      <div class="l-minicart-checkout">
+        <router-link to="/checkout" class="btn btn-dark text-white btn-lg btn-block">Go to Checkout</router-link>
+      </div>
     </div>
     <div v-else>
       <div class="empty-cart">Empty cart</div>
@@ -36,7 +40,7 @@ export default {
       this.removeCartItem(id);
     }
   },
-  computed: mapGetters(["allCartProducts"]),
+  computed: mapGetters(["allCartProducts", "total"]),
   created() {
     this.getCart();
   }

@@ -5,20 +5,23 @@ const state = {
 };
 
 const getters = {
-  allCartProducts: state => state.cart
+  allCartProducts: state => state.cart,
+  total: state =>
+    state.cart.reduce(
+      (acc, current) => parseInt(acc + parseInt(current.price)),
+      0
+    ),
+  count: state => state.cart.length
 };
 
 const actions = {
   getCart({ commit }) {
     const cart = utility.getSessionStorageItem("cart");
-    console.log("get cart", cart);
     commit("setCart", cart);
   },
   addToCart({ commit }, product) {
     const cart = utility.getSessionStorageItem("cart");
     let updatedCart = [];
-
-    console.log("add to cart", cart);
 
     if (cart.filter(el => el.id === product.id).length > 0) {
       updatedCart = cart.map(el => {
@@ -35,8 +38,6 @@ const actions = {
       updatedCart = [...cart, { ...product, qty: 1 }];
     }
 
-    console.log("add to cart", updatedCart);
-
     utility.setSessionStorageItem("cart", updatedCart);
 
     commit("addToCart", product);
@@ -52,7 +53,6 @@ const actions = {
 
 const mutations = {
   addToCart: (state, product) => {
-    console.log("state", state);
     if (state.cart.filter(el => el.id === product.id).length > 0) {
       state.cart = state.cart.map(el => {
         if (el.id === product.id) {

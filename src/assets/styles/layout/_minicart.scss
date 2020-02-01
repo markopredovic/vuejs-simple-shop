@@ -9,6 +9,26 @@
       border-bottom: none;
     }
   }
+  .l-minicart-total {
+    padding: 10px 0;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 2rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .l-minicart-checkout {
+    padding: 0 10px;
+  }
+}
+
+.dropdown-toggle {
+  position: relative;
+
+  .minicart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
 // modules:
@@ -40,4 +60,14 @@
 .empty-cart {
   padding: 10px;
   font-size: 1.8rem;
+}
+
+.minicart-count {
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  font-size: 12px;
+  background-color: #000;
+  border-radius: 20px;
 }

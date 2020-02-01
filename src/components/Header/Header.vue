@@ -31,6 +31,7 @@
               <b-dropdown class="m-2" right no-caret>
                 <template v-slot:button-content>
                   <span class="fa fa-cart-plus"></span>
+                  <span v-if="count > 0" class="minicart-count">{{count}}</span>
                   <span class="sr-only">Search</span>
                 </template>
                 <Minicart />
@@ -45,9 +46,11 @@
 
 <script>
 import Minicart from "../Minicart/Minicart";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Header",
-  components: { Minicart }
+  components: { Minicart },
+  computed: mapGetters(["count"])
 };
 </script>
